@@ -3,7 +3,7 @@ from .extensions import db, login_manager
 from .main import main_bp
 from .tela_trilha import trilha
 from .tela_forum import forum   
-from .set_sites import setsites
+from .insert_questions import InsertQuestions
 from .tela_perfil import perfil
 
 
@@ -24,7 +24,7 @@ def create_app():
     app.register_blueprint(main_bp)
     app.register_blueprint(trilha, url_prefix='/trilha')
     app.register_blueprint(forum)
-    app.register_blueprint(setsites)
+    app.register_blueprint(InsertQuestions)
     app.register_blueprint(perfil)
     
     # Cria as tabelas

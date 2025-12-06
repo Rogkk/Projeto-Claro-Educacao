@@ -16,8 +16,8 @@ def telatrilha():
             return redirect(url_for('main.login'))
         elif 'action' in request.form and request.form['action'] == 'forum':
             return redirect(url_for('forum.forum_page'))
-        elif 'action' in request.form and request.form['action'] == 'setsites':
-            return redirect(url_for('setsites.set_sites_page'))
+        elif 'action' in request.form and request.form['action'] == 'InsertQuestions':
+            return redirect(url_for('InsertQuestions.questions'))
     return render_template('telatrilha.html')
         #return "trilha"
 

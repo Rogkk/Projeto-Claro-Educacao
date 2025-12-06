@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+:root {
+    --poppins: 'Poppins', sans-serif;
+    --lato: 'Lato', sans-serif;
+    --blue-dark: #011137;
+    --orange: #E35A01;
+    --medium-blue: #153163;
+    --dark-grey: #AAAAAA;
+    --blue: #3C91E6;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--medium-blue);
+    overflow-x: hidden;
+}
+
+
+
+
+
+/* SIDEBAR */
+#sidebar {
+    display: flex; /* Habilita Flexbox */
+    flex-direction: column; /* Organiza os filhos verticalmente */
+    height: 100vh; /* Garante que ocupe a altura total da viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: var(--blue-dark);
+    z-index: 2000;
+    font-family: var(--lato);
+    transition: .3s ease;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+
+
+#sidebar::--webkit-scrollbar {
+    display: none;
+}
+
+#sidebar.hide {
+    width: 60px;
+}
+
+#sidebar .brand {
+    flex-shrink: 0; /* Impede que o brand encolha */
+    font-size: 24px;
+    font-weight: 700;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    color: var(--orange);
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: var(--blue-dark);
+    z-index: 500;
+    padding-bottom: 20px;
+    box-sizing: content-box;
+}
+
+#sidebar .brand .brand-logo {
+    min-width: 60px; /* Garante a largura mínima para o alinhamento */
+    height: 60px; /* Defina a altura da imagem (ajuste conforme o tamanho do ícone original) */
+    width: 36px; /* Defina a largura da imagem (ajuste conforme o tamanho do ícone original) */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px; /* Adicione um pequeno padding se necessário para centralizar ou espaçar */
+}
+
+#sidebar.hide .brand .brand-logo {
+    /* Ajustes se a imagem precisar de um tamanho diferente quando o sidebar estiver escondido */
+    padding-top: 10px;
+    width: 60px; 
+    height: 60px; 
+}
+
+#sidebar .brand .text {
+    padding-top: 10px; 
+}
+
+#sidebar .side-menu {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.sidebar-divider {
+    width: 90%;
+    height: 1px;
+    background-color: hsl(210, 99%, 71%);  /* Cor da linha */
+    margin: 0 auto
+}
+
+#sidebar ul.side-menu.top {
+    flex-shrink: 0; /* Impede que o menu superior seja espremido */
+    margin-bottom: 0; /* Remove margem que possa interferir no layout flex */
+}
+
+#sidebar.hide .sidebar-divider {
+    display: none;
+}
+
+#sidebar ul.side-menu.bottom-menu {
+    position: static;
+    bottom: 0;
+    width: 90%; /* Diminui o comprimento da linha para 90% */
+    flex-shrink: 0;
+    border-top: 1px solid hsl(210, 99%, 71%);
+    margin-top: auto; 
+    margin-bottom: 10px; 
+    margin-left: 5%; /* Adiciona margem lateral para centralizar a linha (5% de cada lado) */
+}
+
+#sidebar.hide ul.side-menu.bottom-menu {
+    border-top: none; /* Remove a linha superior */
+}
+
+#sidebar .side-menu li {
+    height: 48px;
+    background: transparent;
+    margin-left: 6px;
+    border-radius: 48px 0 0 48px;
+    padding: 4px;
+}
+
+#sidebar .side-menu li.active {
+    background: var(--medium-blue);
+    position: relative;
+}
+
+#sidebar .side-menu li.active::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: -40px;
+    right: 0;
+    box-shadow: 20px 20px 0 var(--medium-blue);
+    z-index: -1;
+}
+
+#sidebar .side-menu li.active::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    bottom: -40px;
+    right: 0;
+    box-shadow: 20px -20px 0 var(--medium-blue);
+    z-index: -1;
+}
+
+#sidebar .side-menu li a {
+    width: 100%;
+    height: 100%;
+    background: var(--blue-dark);
+    display: flex;
+    align-items: center;
+    border-radius: 48px;
+    font-size: 17px;
+    color: var(--blue);
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+#sidebar .side-menu.top li.active a {
+    color: var(--orange);
+}
+
+#sidebar.hide .side-menu li a {
+    width: calc(48px - (4px * 2));
+    transition: width .3s ease;
+}
+
+#sidebar .side-menu.top li:not(.active) a:hover {
+    color: #81befc;
+}
+
+#sidebar .side-menu li a .bx {
+    min-width: calc(60px - ((4px + 6px) * 2));
+    display: flex;
+    justify-content: center;
+}
+
+.question-read{
+    flex-grow: 1; /* Permite que este elemento ocupe todo o espaço vertical restante */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical se o conteúdo exceder a altura */
+    /* Garante que o padding não cause estouro */
+    box-sizing: border-box; 
+    /* Impede o encolhimento, garantindo que ocupe o espaço disponível */
+    min-height: 0;
+    color:rgb(202, 207, 212);
+    padding: 20px;
+}
+
+
+#sidebar .side-menu li .logout-btn {
+    width: 100%;
+    height: 100%;
+    background: var(--blue-dark); 
+    display: flex;
+    align-items: center;
+    border-radius: 48px;
+    font-size: 17px;
+    color: var(--blue);
+    white-space: nowrap;
+    overflow-x: hidden;
+    padding-top: 15px;
+    border: none; 
+    cursor: pointer;
+    text-align: left;
+}
+
+#sidebar .side-menu li .logout-btn:hover {
+    color: #81befc; 
+}
+
+#sidebar .side-menu li .logout-btn .bx,
+#sidebar .side-menu li .logout-btn .fa-solid {
+    min-width: calc(60px - ((4px + 6px) * 2));
+    display: flex;
+    justify-content: center;
+}
+
+#sidebar.hide .question-read {
+    display: none;
+}
+
+.question-read li.task {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dotted #33425A;
+}
+
+/* NOVO ESTILO: Limita o texto do título da pergunta */
+.question-read .task-title-text {
+    flex-grow: 1; 
+    max-width: 17ch; /* Limita a largura em aproximadamente 14 caracteres */
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis; /* Adiciona as reticências no final */
+    margin-right: 10px; /* Adiciona espaço após o texto e antes das ações */
+    font-size: 16px;
+}
+/* FIM NOVO ESTILO */
+
+.question-read .task-actions {
+    display: flex;
+    gap: 5px; 
+}
+
+.question-read .action-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    line-height: 1; 
+    transition: background-color 0.2s;
+}
+
+/* Estilo para o Ícone */
+.question-read .action-btn i {
+    font-size: 18px; 
+}
+
+/* Cores específicas e hover */
+.question-read .update-btn {
+    color: var(--blue);
+}
+
+.question-read .delete-btn {
+    color: var(--orange);
+}
+
+.question-read .action-btn:hover {
+    background-color: #33425A;
+}
+/* SIDEBAR */
+
+
+
+
+
+/* CONTENT */
+#content {
+    position: relative;
+    width: calc(100% - 280px);
+    left: 280px;
+    transition: .3s ease;
+}
+
+#sidebar.hide~#content {
+    width: calc(100% - 60px);
+    left: 60px;
+}
+
+
+
+
+/* NAVBAR */
+#content nav {
+    height: 56px;
+    background: var(--blue-dark);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    font-family: var(--lato);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#content nav::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: -40px;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: -20px -20px 0 var(--blue-dark);
+}
+
+#content nav .bx.bx-menu {
+    font-size: 30px;
+    flex-grow: 0; 
+    cursor: pointer;
+    color: var(--blue);
+    margin-right: auto;
+    width: 30px; 
+    height: 30px;
+}
+
+#content nav .bx.bx-menu:hover {
+    color: #81befc;
+}
+
+.sidebar-bottom{
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-icon a{
+    width: 40px;
+    height: 40px;
+    background-color: var(--orange);
+    color: rgb(202, 207, 212);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 550;
+    font-size: 20px;
+    font-family: var(--poppins);
+}
+
+/* NAVBAR */
+
+
+
+
+
+/* MAIN */
+#content main {
+    width: 100%;
+    padding: 36px 24px;
+    font-family: var(--poppins);
+    max-height: calc(100vh - 56px);
+    overflow-y: auto;
+}
+
+#content main .head-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
+}
+
+#content main .head-title .left h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--orange);
+}
+
+.question-form {
+    max-width: 600px; /* Defina uma largura máxima para o formulário */
+    margin: 20px auto; /* Centraliza o formulário horizontalmente */
+    padding: 0 24px; /* Adiciona padding lateral para telas menores */
+}
+
+.input-group {
+    position: relative;
+    width: 100%; /* Ocupa 100% da largura do .question-form centralizado */
+    margin-bottom: 20px;
+    border: 1px solid rgba(227, 90, 1, 0.6); 
+    background: linear-gradient(to right,#1f272f, #151f29, #2c3641);
+    border-radius: 20px;
+    display: flex; /* Mantém o display flex para alinhamento interno */
+    align-items: center;
+    padding: 15px 20px; /* O padding é aplicado no container */
+    color: rgb(202, 207, 212);
+    font-size: 16px;
+    outline: none;
+}
+
+.input-group input[type="text"] {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent; 
+    padding: 0; /* Remove padding extra, pois já está no container */
+}
+
+/* Estilo para a div que contém os inputs dinâmicos - se precisar de margem */
+.dynamic-input-group {
+    margin-top: 15px; 
+    padding-top: 15px; 
+    border-top: 1px dashed #33425A;
+}
+
+/* Estilos para os inputs dinâmicos, para que tenham a aparência de input-group */
+.dynamic-input-group input[type="text"] {
+    border: 1px solid rgba(227, 90, 1, 0.6); 
+    background: linear-gradient(to right, #151f29, #2c3641);
+    border-radius: 20px;
+    padding: 15px 20px;
+    margin-bottom: 20px; /* Adiciona margem entre os campos de título e pergunta dinâmicos */
+}
+
+
+
+/* MAIN */
+/* CONTENT */
